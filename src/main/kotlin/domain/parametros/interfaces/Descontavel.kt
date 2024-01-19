@@ -1,4 +1,4 @@
-package br.ufu.classisafra.model;
+package domain.parametros.interfaces;
 
 interface Descontavel {
     fun calcularDescontoEmKg(pesoInicialEmKg: Double): Double

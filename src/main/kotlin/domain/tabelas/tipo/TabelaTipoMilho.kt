@@ -1,6 +1,7 @@
 package br.ufu.classisafra.data.tipo
 
 import br.ufu.classisafra.data.tipo.data_model.TipoMilhoData
+import domain.tabelas.tipo.interfaces.TabelaTipo
 
 /**
  * Data class que representa uma tabela de tipos de grãos de Milho com seus limites de qualidade.

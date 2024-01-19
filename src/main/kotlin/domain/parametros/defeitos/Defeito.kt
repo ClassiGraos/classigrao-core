@@ -1,7 +1,7 @@
-package br.ufu.classisafra.model.parametros
+package domain.parametros.defeitos
 
-import br.ufu.classisafra.model.Descontavel
-import br.ufu.classisafra.model.Toleravel
+import domain.parametros.interfaces.Descontavel
+import domain.parametros.interfaces.Toleravel
 import br.ufu.classisafra.model.classificacao.tipos_defeitos.TiposDefeitos
 
 /**

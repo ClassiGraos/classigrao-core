@@ -2,7 +2,7 @@ package br.ufu.classisafra.data.tipo
 import br.ufu.classisafra.data.tipo.data_model.LimiteForaDoTipoSoja
 import br.ufu.classisafra.data.tipo.data_model.TipoSojaData
 import br.ufu.classisafra.model.classificacao.grupo.GrupoSoja
-import java.util.Objects
+import domain.tabelas.tipo.interfaces.TabelaTipo
 
 /**
  * Data class que representa uma tabela de tipos de grãos de Soja com seus limites de qualidade.

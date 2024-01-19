@@ -1,6 +1,7 @@
-package br.ufu.classisafra.model.parametros
+package domain.parametros.impurezas
 
 import br.ufu.classisafra.model.classificacao.tipos_defeitos.TiposImpurezas
+import domain.parametros.defeitos.Defeito
 
 /**
  * Classe que representa as impurezas em grãos, com informações sobre peso, amostra e limite tolerado.

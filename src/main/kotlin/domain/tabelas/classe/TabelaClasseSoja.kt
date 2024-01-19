@@ -1,5 +1,7 @@
 package br.ufu.classisafra.data.classe
 
+import domain.tabelas.classe.interfaces.TabelaClasse
+
 /**
  * Data class que representa os valores mínimos das classes de Soja.
  *

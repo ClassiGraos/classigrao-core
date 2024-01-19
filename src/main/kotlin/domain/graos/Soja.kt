@@ -1,21 +1,20 @@
 package br.ufu.classisafra.model.graos
 
-import br.ufu.classisafra.data.classe.TabelaClasse
+import domain.tabelas.classe.interfaces.TabelaClasse
 import br.ufu.classisafra.data.classe.TabelaClasseSoja
-import br.ufu.classisafra.data.tipo.TabelaTipo
+import domain.tabelas.tipo.interfaces.TabelaTipo
 import br.ufu.classisafra.data.tipo.TabelaTipoSoja
 import br.ufu.classisafra.data.tipo.data_model.TipoSojaData
 import br.ufu.classisafra.model.classificacao.classe.Classe
 import br.ufu.classisafra.model.classificacao.classe.ClasseSoja
 import br.ufu.classisafra.model.classificacao.tipos_defeitos.TiposDefeitosSoja
-import br.ufu.classisafra.model.classificacao.grupo.Grupo
 import br.ufu.classisafra.model.classificacao.grupo.GrupoSoja
 import br.ufu.classisafra.model.classificacao.tipo.Tipo
 import br.ufu.classisafra.model.classificacao.tipo.TipoSoja
-import br.ufu.classisafra.model.parametros.Defeito
+import domain.parametros.defeitos.Defeito
 import br.ufu.classisafra.model.parametros.defeitos.DefeitosSoja
-import br.ufu.classisafra.model.parametros.Impurezas
-import br.ufu.classisafra.model.parametros.Umidade
+import domain.parametros.impurezas.Impurezas
+import domain.parametros.umidade.Umidade
 
 /**
  * Esta classe representa grãos de soja, incluindo informações sobre defeitos e características específicas.

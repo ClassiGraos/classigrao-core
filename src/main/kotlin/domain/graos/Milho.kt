@@ -1,9 +1,9 @@
 package br.ufu.classisafra.model.graos
 
-import br.ufu.classisafra.data.classe.TabelaClasse
+import domain.tabelas.classe.interfaces.TabelaClasse
 import br.ufu.classisafra.data.classe.TabelaClasseMilho
 import br.ufu.classisafra.data.grupo.TabelaGrupoMilho
-import br.ufu.classisafra.data.tipo.TabelaTipo
+import domain.tabelas.tipo.interfaces.TabelaTipo
 import br.ufu.classisafra.data.tipo.TabelaTipoMilho
 import br.ufu.classisafra.data.tipo.data_model.TipoMilhoData
 import br.ufu.classisafra.model.classificacao.classe.Classe
@@ -13,9 +13,9 @@ import br.ufu.classisafra.model.classificacao.grupo.GrupoMilho
 import br.ufu.classisafra.model.classificacao.tipo.Tipo
 import br.ufu.classisafra.model.classificacao.tipo.TipoMilho
 import br.ufu.classisafra.model.classificacao.tipos_defeitos.TiposDefeitosMilho
-import br.ufu.classisafra.model.parametros.Defeito
-import br.ufu.classisafra.model.parametros.Impurezas
-import br.ufu.classisafra.model.parametros.Umidade
+import domain.parametros.defeitos.Defeito
+import domain.parametros.impurezas.Impurezas
+import domain.parametros.umidade.Umidade
 import br.ufu.classisafra.model.parametros.consistencia.ConsistenciaMilho
 import br.ufu.classisafra.model.parametros.cores.CoresMilho
 import br.ufu.classisafra.model.parametros.defeitos.DefeitosMilho

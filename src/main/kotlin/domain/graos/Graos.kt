@@ -1,13 +1,8 @@
 package br.ufu.classisafra.model.graos
 
-import br.ufu.classisafra.data.classe.TabelaClasse
-import br.ufu.classisafra.data.tipo.TabelaTipo
-import br.ufu.classisafra.model.classificacao.classe.Classe
-import br.ufu.classisafra.model.classificacao.tipo.Tipo
-import br.ufu.classisafra.model.classificacao.grupo.Grupo
-import br.ufu.classisafra.model.parametros.Defeito
-import br.ufu.classisafra.model.parametros.Impurezas
-import br.ufu.classisafra.model.parametros.Umidade
+import domain.parametros.defeitos.Defeito
+import domain.parametros.impurezas.Impurezas
+import domain.parametros.umidade.Umidade
 
 /**
  * Classe abstrata que representa grãos com informações sobre amostra, peso inicial e atributos de qualidade.

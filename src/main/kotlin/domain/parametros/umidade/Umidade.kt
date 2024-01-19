@@ -1,7 +1,7 @@
-package br.ufu.classisafra.model.parametros
+package domain.parametros.umidade
 
-import br.ufu.classisafra.model.Descontavel
-import br.ufu.classisafra.model.Toleravel
+import domain.parametros.interfaces.Descontavel
+import domain.parametros.interfaces.Toleravel
 
 /**
  * Classe que representa a umidade de um grão e sua tolerância.
