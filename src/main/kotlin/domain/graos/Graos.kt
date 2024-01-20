@@ -28,6 +28,26 @@ abstract class Graos(
 ) {
 
     /**
+     * Inicializa a classe [Graos], verificando se os valores iniciais de amostra e peso inicial estão dentro do
+     * intervalo permitido.
+     *
+     * @param amostraEmGramas Peso da amostra em gramas.
+     * @param pesoInicialEmKg Peso inicial do lote de grãos em quilogramas (kg).
+     */
+    init {
+        require(inRange(amostraEmGramas))
+        require(inRange(pesoInicialEmKg))
+    }
+
+    /**
+     * Verifica se o valor fornecido está dentro do intervalo permitido (maior ou igual a zero).
+     *
+     * @param value O valor a ser verificado.
+     * @return true se o valor estiver dentro do intervalo permitido, caso contrário false.
+     */
+    private fun inRange(value: Double) = value > 0
+
+    /**
      * Peso da amostra em gramas.
      *
      * @throws IllegalArgumentException Se o peso da amostra for menor ou igual a zero.
