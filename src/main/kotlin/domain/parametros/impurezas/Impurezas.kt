@@ -1,6 +1,6 @@
 package domain.parametros.impurezas
 
-import br.ufu.classisafra.model.classificacao.tipos_defeitos.TiposImpurezas
+import br.ufu.classisafra.model.classificacao.tipos_defeitos.ImpurezasEnum
 import domain.parametros.defeitos.Defeito
 
 /**
@@ -21,7 +21,7 @@ class Impurezas (
     limiteToleradoEmPorcentagem: Double
 
 ) : Defeito(
-    tipo = TiposImpurezas.IMPUREZAS,
+    tipo = ImpurezasEnum.IMPUREZAS,
     pesoEmGramas = pesoEmGramas,
     amostraEmGramas = amostraEmGramas,
     desagio = 0.0,

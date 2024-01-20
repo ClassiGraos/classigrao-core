@@ -2,7 +2,7 @@ package domain.parametros.defeitos
 
 import domain.parametros.interfaces.Descontavel
 import domain.parametros.interfaces.Toleravel
-import br.ufu.classisafra.model.classificacao.tipos_defeitos.TiposDefeitos
+import br.ufu.classisafra.model.classificacao.tipos_defeitos.DefeitosEnum
 
 /**
  * Classe que representa a quantidade de um defeito dos grãos, com informações sobre peso,
@@ -22,7 +22,7 @@ import br.ufu.classisafra.model.classificacao.tipos_defeitos.TiposDefeitos
  */
 open class Defeito(
 
-    var tipo: TiposDefeitos,
+    var tipo: DefeitosEnum,
     pesoEmGramas: Double,
     amostraEmGramas: Double,
     desagio: Double = 0.0,

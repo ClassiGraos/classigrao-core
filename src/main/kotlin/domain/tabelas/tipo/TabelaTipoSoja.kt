@@ -1,7 +1,7 @@
 package br.ufu.classisafra.data.tipo
 import br.ufu.classisafra.data.tipo.data_model.LimiteForaDoTipoSoja
 import br.ufu.classisafra.data.tipo.data_model.TipoSojaData
-import br.ufu.classisafra.model.classificacao.grupo.GrupoSoja
+import br.ufu.classisafra.model.classificacao.grupo.GrupoSojaEnum
 import domain.tabelas.tipo.interfaces.TabelaTipo
 
 /**
@@ -27,7 +27,7 @@ data class TabelaTipoSoja (
         limiteEsverdeados = 2.0,
         limitePartidosQuebradosAmassados = 8.0,
         limiteImpurezas = 1.0,
-        grupo = GrupoSoja.GRUPO_1,
+        grupo = GrupoSojaEnum.GRUPO_1,
     ),
 
     var tipo2: TipoSojaData = TipoSojaData(
@@ -38,7 +38,7 @@ data class TabelaTipoSoja (
         limiteEsverdeados = 4.0,
         limitePartidosQuebradosAmassados = 15.0,
         limiteImpurezas = 1.0,
-        grupo = GrupoSoja.GRUPO_1
+        grupo = GrupoSojaEnum.GRUPO_1
     ),
 
     var padrao: TipoSojaData = TipoSojaData(
@@ -49,7 +49,7 @@ data class TabelaTipoSoja (
         limiteEsverdeados = 8.0,
         limitePartidosQuebradosAmassados = 30.0,
         limiteImpurezas = 1.0,
-        grupo = GrupoSoja.GRUPO_2
+        grupo = GrupoSojaEnum.GRUPO_2
     ),
 
     var limiteForaDoTipo: LimiteForaDoTipoSoja = LimiteForaDoTipoSoja(

@@ -1,6 +1,5 @@
 package domain.parametros.impurezas
 
-import br.ufu.classisafra.model.classificacao.tipos_defeitos.TiposDefeitosSoja
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows

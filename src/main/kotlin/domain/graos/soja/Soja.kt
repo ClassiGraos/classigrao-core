@@ -1,16 +1,17 @@
-package br.ufu.classisafra.model.graos
+package domain.graos.soja
 
 import domain.tabelas.classe.interfaces.TabelaClasse
 import br.ufu.classisafra.data.classe.TabelaClasseSoja
 import domain.tabelas.tipo.interfaces.TabelaTipo
 import br.ufu.classisafra.data.tipo.TabelaTipoSoja
 import br.ufu.classisafra.data.tipo.data_model.TipoSojaData
-import br.ufu.classisafra.model.classificacao.classe.Classe
-import br.ufu.classisafra.model.classificacao.classe.ClasseSoja
-import br.ufu.classisafra.model.classificacao.tipos_defeitos.TiposDefeitosSoja
-import br.ufu.classisafra.model.classificacao.grupo.GrupoSoja
-import br.ufu.classisafra.model.classificacao.tipo.Tipo
-import br.ufu.classisafra.model.classificacao.tipo.TipoSoja
+import br.ufu.classisafra.model.classificacao.classe.ClasseEnum
+import br.ufu.classisafra.model.classificacao.classe.ClasseSojaEnum
+import br.ufu.classisafra.model.classificacao.tipos_defeitos.DefeitosSojaEnum
+import br.ufu.classisafra.model.classificacao.grupo.GrupoSojaEnum
+import br.ufu.classisafra.model.classificacao.tipo.TipoEnum
+import br.ufu.classisafra.model.classificacao.tipo.TipoSojaEnum
+import br.ufu.classisafra.model.graos.Graos
 import domain.parametros.defeitos.Defeito
 import br.ufu.classisafra.model.parametros.defeitos.TabelaDefeitosSoja
 import domain.parametros.impurezas.Impurezas
@@ -56,16 +57,16 @@ class Soja(
      * @return O tipo dos grãos de soja.
      * @throws IllegalArgumentException Se a tabela de tipos não for do tipo TabelaTipoSoja.
      */
-    fun determinarTipo(tabelaTipo: TabelaTipo, grupoSoja: GrupoSoja): Tipo {
+    fun determinarTipo(tabelaTipo: TabelaTipo, grupoSoja: GrupoSojaEnum): TipoEnum {
         if (tabelaTipo !is TabelaTipoSoja) throw IllegalArgumentException("A tabela de tipo utilizada não é referente a Soja.")
 
         defeitosSoja = mapearDefeitos()
 
-        return if (foiDesclassificado(grupoSoja, tabelaTipo)) TipoSoja.DESCLASSIFICADO
-        else if (verificarSeDoTipo(tabelaTipo.tipo1)) TipoSoja.TIPO_1
-        else if (verificarSeDoTipo(tabelaTipo.tipo2)) TipoSoja.TIPO_2
-        else if (verificarSeDoTipo(tabelaTipo.padrao)) TipoSoja.PADRAO
-        else TipoSoja.FORA_DE_TIPO
+        return if (foiDesclassificado(grupoSoja, tabelaTipo)) TipoSojaEnum.DESCLASSIFICADO
+        else if (verificarSeDoTipo(tabelaTipo.tipo1)) TipoSojaEnum.TIPO_1
+        else if (verificarSeDoTipo(tabelaTipo.tipo2)) TipoSojaEnum.TIPO_2
+        else if (verificarSeDoTipo(tabelaTipo.padrao)) TipoSojaEnum.PADRAO
+        else TipoSojaEnum.FORA_DE_TIPO
     }
 
     /**
@@ -75,11 +76,11 @@ class Soja(
      * @return A classe dos grãos de soja.
      * @throws IllegalArgumentException Se a tabela de classes não for do tipo TabelaClasseSoja.
      */
-    fun determinarClasse(tabelaClasse: TabelaClasse): Classe {
+    fun determinarClasse(tabelaClasse: TabelaClasse): ClasseEnum {
         if (tabelaClasse !is TabelaClasseSoja) throw IllegalArgumentException("A tabela de classe utilizada não é referente a Soja.")
 
-        if (calcularPorcentagemAmarelos() >= tabelaClasse.minimoGraosAmarelos) return ClasseSoja.AMARELA
-        return ClasseSoja.MISTURADA
+        if (calcularPorcentagemAmarelos() >= tabelaClasse.minimoGraosAmarelos) return ClasseSojaEnum.AMARELA
+        return ClasseSojaEnum.MISTURADA
     }
 
 
@@ -99,11 +100,11 @@ class Soja(
      * @return true se os grãos estiverem dentro do limite de tolerância deste tipo, caso contrário false.
      */
     private fun foiDesclassificado(
-        grupoSoja: GrupoSoja,
+        grupoSoja: GrupoSojaEnum,
         tabelaTipo: TabelaTipoSoja
     ): Boolean {
         val limiteForaDoTipo =
-            if (grupoSoja == GrupoSoja.GRUPO_1)
+            if (grupoSoja == GrupoSojaEnum.GRUPO_1)
                 tabelaTipo.limiteForaDoTipo.limiteDefeitosGravesGrupo1
             else tabelaTipo.limiteForaDoTipo.limiteDefeitosGravesGrupo2
 
@@ -139,17 +140,17 @@ class Soja(
         var defeitosSoja = TabelaDefeitosSoja();
         for (defeito in defeitos){
             when (defeito.tipo) {
-                TiposDefeitosSoja.ARDIDOS -> defeitosSoja.ardidosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosSoja.QUEIMADOS -> defeitosSoja.queimadosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosSoja.MOFADOS -> defeitosSoja.mofadosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosSoja.FERMENTADOS -> defeitosSoja.fermentadosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosSoja.GERMINADOS -> defeitosSoja.germinadosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosSoja.IMATUROS -> defeitosSoja.imaturosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosSoja.CHOCHOS -> defeitosSoja.chochosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosSoja.ESVERDEADOS -> defeitosSoja.esverdeadosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosSoja.QUEBRADOS -> defeitosSoja.partidosQuebradosAmaçadosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosSoja.ATACADOS_PRAGAS -> defeitosSoja.atacadosPorPragaEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosSoja.DEMAIS_DANIFICADOS -> defeitosSoja.demaisDanificadosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosSojaEnum.ARDIDOS -> defeitosSoja.ardidosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosSojaEnum.QUEIMADOS -> defeitosSoja.queimadosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosSojaEnum.MOFADOS -> defeitosSoja.mofadosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosSojaEnum.FERMENTADOS -> defeitosSoja.fermentadosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosSojaEnum.GERMINADOS -> defeitosSoja.germinadosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosSojaEnum.IMATUROS -> defeitosSoja.imaturosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosSojaEnum.CHOCHOS -> defeitosSoja.chochosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosSojaEnum.ESVERDEADOS -> defeitosSoja.esverdeadosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosSojaEnum.QUEBRADOS -> defeitosSoja.partidosQuebradosAmaçadosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosSojaEnum.ATACADOS_PRAGAS -> defeitosSoja.atacadosPorPragaEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosSojaEnum.DEMAIS_DANIFICADOS -> defeitosSoja.demaisDanificadosEmPorcentagem = defeito.calcularPorcentagem()
             }
         }
         return defeitosSoja

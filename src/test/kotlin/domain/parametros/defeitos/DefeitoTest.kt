@@ -1,7 +1,6 @@
 package domain.parametros.defeitos
 
-import br.ufu.classisafra.model.classificacao.tipos_defeitos.TiposDefeitosSoja
-import domain.parametros.defeitos.Defeito
+import br.ufu.classisafra.model.classificacao.tipos_defeitos.DefeitosSojaEnum
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -13,7 +12,7 @@ class DefeitoTest {
     @DisplayName("Quando o Deságio for maior que 100 deve lançar exceção.")
     fun quandoDesagioAcimaDe100_ThrowsIllegalArgumentException(){
         assertThrows<IllegalArgumentException> { Defeito(
-            TiposDefeitosSoja.QUEIMADOS,
+            DefeitosSojaEnum.QUEIMADOS,
             3.0,
             150.0,
             120.0,
@@ -25,7 +24,7 @@ class DefeitoTest {
     @DisplayName("Quando o Deságio for menor que 0 deve lançar exceção.")
     fun quandoDesagioAbaixoDe0_ThrowsIllegalArgumentException(){
         assertThrows<IllegalArgumentException> { Defeito(
-            TiposDefeitosSoja.QUEIMADOS,
+            DefeitosSojaEnum.QUEIMADOS,
             3.0,
             150.0,
             -1.0,
@@ -37,7 +36,7 @@ class DefeitoTest {
     @DisplayName("Quando o Limite Tolerado for maior que 100 deve lançar exceção.")
     fun quandoLimiteToleradoEmPorcentagemAcimaDe100_ThrowsIllegalArgumentException(){
         assertThrows<IllegalArgumentException> { Defeito(
-            TiposDefeitosSoja.QUEIMADOS,
+            DefeitosSojaEnum.QUEIMADOS,
             3.0,
             150.0,
             0.0,
@@ -49,7 +48,7 @@ class DefeitoTest {
     @DisplayName("Quando o Limite Tolerado for menor que 0 deve lançar exceção.")
     fun quandoLimiteToleradoEmPorcentagemMenorQue0_ThrowsIllegalArgumentException(){
         assertThrows<IllegalArgumentException> { Defeito(
-            TiposDefeitosSoja.QUEIMADOS,
+            DefeitosSojaEnum.QUEIMADOS,
             3.0,
             150.0,
             0.0,
@@ -61,7 +60,7 @@ class DefeitoTest {
     @DisplayName("Quando o Peso em Gramas for menor que 0 deve lançar exceção.")
     fun quandoPesoEmGramasMenorQue0_ThrowsIllegalArgumentException(){
         assertThrows<IllegalArgumentException> { Defeito(
-            TiposDefeitosSoja.QUEIMADOS,
+            DefeitosSojaEnum.QUEIMADOS,
             -1.0,
             150.0,
             0.0,
@@ -73,7 +72,7 @@ class DefeitoTest {
     @DisplayName("Quando a Amostra em Gramas for igual 0 deve lançar exceção.")
     fun quandoAmostraEmGramasIgual0_ThrowsIllegalArgumentException(){
         assertThrows<IllegalArgumentException> { Defeito(
-            TiposDefeitosSoja.QUEIMADOS,
+            DefeitosSojaEnum.QUEIMADOS,
             0.0,
             0.0,
             0.0,
@@ -85,7 +84,7 @@ class DefeitoTest {
     @DisplayName("Quando a Amostra em Gramas for for menor que o Peso em Gramas deve lançar exceção.")
     fun quandoAmostraEmGramasMenorQuePesoEmGramas_ThrowsIllegalArgumentException(){
         assertThrows<IllegalArgumentException> { Defeito(
-            TiposDefeitosSoja.QUEIMADOS,
+            DefeitosSojaEnum.QUEIMADOS,
             180.0,
             150.0,
             0.0,
@@ -97,7 +96,7 @@ class DefeitoTest {
     @DisplayName("Calcula a porcentagem correta.")
     fun calcularAPorcentagemTest() {
         val defeito = Defeito(
-            TiposDefeitosSoja.QUEIMADOS,
+            DefeitosSojaEnum.QUEIMADOS,
             3.0,
             150.0,
             0.0,
@@ -111,7 +110,7 @@ class DefeitoTest {
     @DisplayName("Quando o limite tolerado for maior que a porcentagem, estaAbaixoDoTolerado() deve retornar verdadeiro.")
     fun estaAbaixoDoToleradoRetornTrue() {
         val defeito = Defeito(
-            TiposDefeitosSoja.QUEIMADOS,
+            DefeitosSojaEnum.QUEIMADOS,
             1.0,
             150.0,
             0.0,
@@ -125,7 +124,7 @@ class DefeitoTest {
     @DisplayName("Quando o limite tolerado for menor que a porcentagem, estaAbaixoDoTolerado() deve retornar falso.")
     fun estaAbaixoDoToleradoReturnFalse() {
         val defeito = Defeito(
-            TiposDefeitosSoja.QUEIMADOS,
+            DefeitosSojaEnum.QUEIMADOS,
             3.0,
             150.0,
             0.0,
@@ -139,7 +138,7 @@ class DefeitoTest {
     @DisplayName("Calcula o desconto correto.")
     fun calcularDescontEmKgTest() {
         val defeito = Defeito(
-            TiposDefeitosSoja.QUEIMADOS,
+            DefeitosSojaEnum.QUEIMADOS,
             3.0,
             150.0,
             5.0,

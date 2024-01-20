@@ -1,6 +1,6 @@
 package br.ufu.classisafra.data.tipo.data_model
 
-import br.ufu.classisafra.model.classificacao.grupo.GrupoSoja
+import br.ufu.classisafra.model.classificacao.grupo.GrupoSojaEnum
 
 /**
  * Data class que representa os limites de qualidade para o tipo de grão Soja.
@@ -28,5 +28,5 @@ data class TipoSojaData(
     var limiteEsverdeados: Double,
     var limitePartidosQuebradosAmassados: Double,
     var limiteImpurezas: Double,
-    var grupo: GrupoSoja
+    var grupo: GrupoSojaEnum
 )

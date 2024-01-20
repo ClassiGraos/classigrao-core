@@ -1,5 +1,5 @@
 package br.ufu.classisafra.model.classificacao.grupo
 
-enum class GrupoMilho: Grupo {
+enum class GrupoMilhoEnum: GrupoEnum {
     DURO, DENTADO, SEMIDURO, MISTURADO
 }

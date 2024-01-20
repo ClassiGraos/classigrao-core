@@ -1,4 +1,4 @@
-package br.ufu.classisafra.model.graos
+package domain.graos.milho
 
 import domain.tabelas.classe.interfaces.TabelaClasse
 import br.ufu.classisafra.data.classe.TabelaClasseMilho
@@ -6,13 +6,14 @@ import br.ufu.classisafra.data.grupo.TabelaGrupoMilho
 import domain.tabelas.tipo.interfaces.TabelaTipo
 import br.ufu.classisafra.data.tipo.TabelaTipoMilho
 import br.ufu.classisafra.data.tipo.data_model.TipoMilhoData
-import br.ufu.classisafra.model.classificacao.classe.Classe
-import br.ufu.classisafra.model.classificacao.classe.ClasseMilho
-import br.ufu.classisafra.model.classificacao.grupo.Grupo
-import br.ufu.classisafra.model.classificacao.grupo.GrupoMilho
-import br.ufu.classisafra.model.classificacao.tipo.Tipo
-import br.ufu.classisafra.model.classificacao.tipo.TipoMilho
-import br.ufu.classisafra.model.classificacao.tipos_defeitos.TiposDefeitosMilho
+import br.ufu.classisafra.model.classificacao.classe.ClasseEnum
+import br.ufu.classisafra.model.classificacao.classe.ClasseMilhoEnum
+import br.ufu.classisafra.model.classificacao.grupo.GrupoEnum
+import br.ufu.classisafra.model.classificacao.grupo.GrupoMilhoEnum
+import br.ufu.classisafra.model.classificacao.tipo.TipoEnum
+import br.ufu.classisafra.model.classificacao.tipo.TipoMilhoEnum
+import br.ufu.classisafra.model.classificacao.tipos_defeitos.DefeitosMilhoEnum
+import br.ufu.classisafra.model.graos.Graos
 import domain.parametros.defeitos.Defeito
 import domain.parametros.impurezas.Impurezas
 import domain.parametros.umidade.Umidade
@@ -71,16 +72,16 @@ class Milho(
      * @return O tipo dos grãos de milho.
      * @throws IllegalArgumentException Se a tabela de tipos fornecida não for para milho.
      */
-    fun determinarTipo(tabelaTipo: TabelaTipo): Tipo {
+    fun determinarTipo(tabelaTipo: TabelaTipo): TipoEnum {
         if (tabelaTipo !is TabelaTipoMilho) throw IllegalArgumentException("A tabela de tipo utilizada não é referente a Milho.")
 
         defeitosMilho = mapearDefeitos()
 
-        return if (verificarSeDoTipo(tabelaTipo.tipo1)) TipoMilho.TIPO_1
-        else if (verificarSeDoTipo(tabelaTipo.tipo2)) TipoMilho.TIPO_2
-        else if (verificarSeDoTipo(tabelaTipo.tipo3)) TipoMilho.TIPO_3
-        else if (verificarSeDoTipo(tabelaTipo.foraDeTipo)) TipoMilho.FORA_DE_TIPO
-        else TipoMilho.DESCLASSIFICADO
+        return if (verificarSeDoTipo(tabelaTipo.tipo1)) TipoMilhoEnum.TIPO_1
+        else if (verificarSeDoTipo(tabelaTipo.tipo2)) TipoMilhoEnum.TIPO_2
+        else if (verificarSeDoTipo(tabelaTipo.tipo3)) TipoMilhoEnum.TIPO_3
+        else if (verificarSeDoTipo(tabelaTipo.foraDeTipo)) TipoMilhoEnum.FORA_DE_TIPO
+        else TipoMilhoEnum.DESCLASSIFICADO
     }
 
     /**
@@ -90,15 +91,15 @@ class Milho(
      * @return A classe dos grãos de milho.
      * @throws IllegalArgumentException Se a tabela de classes fornecida não for para milho.
      */
-    fun determinarClasse(tabelaClasse: TabelaClasse): Classe {
+    fun determinarClasse(tabelaClasse: TabelaClasse): ClasseEnum {
         if (tabelaClasse !is TabelaClasseMilho) throw IllegalArgumentException("A tabela de classe utilizada não é referente a Milho.")
 
         val coresMilho = calcularPorcentagensCores()
 
-        if (coresMilho.amarelosEmPorcentagem >= tabelaClasse.minimoGraosAmarelos) return ClasseMilho.AMARELA
-        else if (coresMilho.brancosEmPorcentagem >= tabelaClasse.minimoGraosBrancos) return ClasseMilho.BRANCA
-        else if (coresMilho.coloridosEmPorcentagem >= tabelaClasse.minimoGraosOutrasCores) return ClasseMilho.COR
-        return ClasseMilho.MISTURADA
+        if (coresMilho.amarelosEmPorcentagem >= tabelaClasse.minimoGraosAmarelos) return ClasseMilhoEnum.AMARELA
+        else if (coresMilho.brancosEmPorcentagem >= tabelaClasse.minimoGraosBrancos) return ClasseMilhoEnum.BRANCA
+        else if (coresMilho.coloridosEmPorcentagem >= tabelaClasse.minimoGraosOutrasCores) return ClasseMilhoEnum.COR
+        return ClasseMilhoEnum.MISTURADA
     }
 
     /**
@@ -107,13 +108,13 @@ class Milho(
      * @param tabelaGrupo A tabela de grupo usada para determinar o grupo dos grãos de milho.
      * @return O grupo dos grãos de milho.
      */
-    fun determinarGrupo(tabelaGrupo: TabelaGrupoMilho): Grupo {
+    fun determinarGrupo(tabelaGrupo: TabelaGrupoMilho): GrupoEnum {
         val consistenciaMilho = calcularPorcentagensConsistencia()
 
-        if (consistenciaMilho.duroEmPorcentagem > tabelaGrupo.minimoGraosDuros) return GrupoMilho.DURO
-        else if (consistenciaMilho.semiduroEmPorcentagem > tabelaGrupo.minimoGraosSemiduros) return GrupoMilho.SEMIDURO
-        else if (consistenciaMilho.dentadoEmPorcentagem > tabelaGrupo.minimoGraosDentados) return GrupoMilho.DENTADO
-        return GrupoMilho.MISTURADO
+        if (consistenciaMilho.duroEmPorcentagem > tabelaGrupo.minimoGraosDuros) return GrupoMilhoEnum.DURO
+        else if (consistenciaMilho.semiduroEmPorcentagem > tabelaGrupo.minimoGraosSemiduros) return GrupoMilhoEnum.SEMIDURO
+        else if (consistenciaMilho.dentadoEmPorcentagem > tabelaGrupo.minimoGraosDentados) return GrupoMilhoEnum.DENTADO
+        return GrupoMilhoEnum.MISTURADO
     }
 
     /**
@@ -169,14 +170,14 @@ class Milho(
         var defeitosMilho = TabelaDefeitosMilho();
         for (defeito in defeitos) {
             when (defeito.tipo) {
-                TiposDefeitosMilho.ARDIDOS -> defeitosMilho.ardidosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosMilho.MOFADOS -> defeitosMilho.mofadosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosMilho.FERMENTADOS -> defeitosMilho.fermentadosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosMilho.GERMINADOS -> defeitosMilho.germinadosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosMilho.CHOCHOS_IMATUROS -> defeitosMilho.chochosImaturosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosMilho.GESSADOS -> defeitosMilho.gessadosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosMilho.CARUNCHADOS -> defeitosMilho.carunchadosEmPorcentagem = defeito.calcularPorcentagem()
-                TiposDefeitosMilho.QUEBRADOS -> defeitosMilho.quebradosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosMilhoEnum.ARDIDOS -> defeitosMilho.ardidosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosMilhoEnum.MOFADOS -> defeitosMilho.mofadosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosMilhoEnum.FERMENTADOS -> defeitosMilho.fermentadosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosMilhoEnum.GERMINADOS -> defeitosMilho.germinadosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosMilhoEnum.CHOCHOS_IMATUROS -> defeitosMilho.chochosImaturosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosMilhoEnum.GESSADOS -> defeitosMilho.gessadosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosMilhoEnum.CARUNCHADOS -> defeitosMilho.carunchadosEmPorcentagem = defeito.calcularPorcentagem()
+                DefeitosMilhoEnum.QUEBRADOS -> defeitosMilho.quebradosEmPorcentagem = defeito.calcularPorcentagem()
             }
         }
         return defeitosMilho
