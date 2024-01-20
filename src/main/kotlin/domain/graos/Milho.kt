@@ -18,7 +18,7 @@ import domain.parametros.impurezas.Impurezas
 import domain.parametros.umidade.Umidade
 import br.ufu.classisafra.model.parametros.consistencia.ConsistenciaMilho
 import br.ufu.classisafra.model.parametros.cores.CoresMilho
-import br.ufu.classisafra.model.parametros.defeitos.DefeitosMilho
+import br.ufu.classisafra.model.parametros.defeitos.TabelaDefeitosMilho
 
 /**
  * Classe que representa grãos de milho e suas características.
@@ -62,7 +62,7 @@ class Milho(
     /**
      * Estrutura DefeitosMilho, a qual os defeitos do Milho serão mapeados.
      */
-    lateinit var defeitosMilho: DefeitosMilho
+    lateinit var defeitosMilho: TabelaDefeitosMilho
 
     /**
      * Determina o tipo dos grãos de milho com base na tabela de tipos fornecida.
@@ -161,12 +161,12 @@ class Milho(
     }
 
     /**
-     * Mapeia os defeitos presentes na amostra de grãos de milho para a classe [DefeitosMilho].
+     * Mapeia os defeitos presentes na amostra de grãos de milho para a classe [TabelaDefeitosMilho].
      *
-     * @return Um objeto [DefeitosMilho] contendo as porcentagens de defeitos de milho.
+     * @return Um objeto [TabelaDefeitosMilho] contendo as porcentagens de defeitos de milho.
      */
-    private fun mapearDefeitos(): DefeitosMilho {
-        var defeitosMilho = DefeitosMilho();
+    private fun mapearDefeitos(): TabelaDefeitosMilho {
+        var defeitosMilho = TabelaDefeitosMilho();
         for (defeito in defeitos) {
             when (defeito.tipo) {
                 TiposDefeitosMilho.ARDIDOS -> defeitosMilho.ardidosEmPorcentagem = defeito.calcularPorcentagem()

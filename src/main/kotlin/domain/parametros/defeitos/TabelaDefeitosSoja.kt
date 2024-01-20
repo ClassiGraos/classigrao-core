@@ -15,7 +15,7 @@ package br.ufu.classisafra.model.parametros.defeitos
  * @property esverdeadosEmPorcentagem Porcentagem de grãos esverdeados.
  * @property partidosQuebradosAmaçadosEmPorcentagem Porcentagem de grãos partidos, quebrados ou amassados.
  */
-data class DefeitosSoja(
+data class TabelaDefeitosSoja(
     var ardidosEmPorcentagem: Double = 0.0,
     var queimadosEmPorcentagem: Double = 0.0,
     var mofadosEmPorcentagem: Double = 0.0,
@@ -28,6 +28,44 @@ data class DefeitosSoja(
     var esverdeadosEmPorcentagem: Double = 0.0,
     var partidosQuebradosAmaçadosEmPorcentagem: Double = 0.0
 ) {
+
+    /**
+     * Inicializador da classe [TabelaDefeitosSoja].
+     *
+     * Este bloco de inicialização é usado para validar os valores iniciais da instância de [TabelaDefeitosSoja].
+     * Certifica-se de que todos os parâmetros esteja dentro do intervalo tolerado.
+     *
+     * @param ardidosEmPorcentagem Porcentagem de grãos ardidos.
+     * @param queimadosEmPorcentagem Porcentagem de grãos queimados.
+     * @param mofadosEmPorcentagem Porcentagem de grãos mofados.
+     * @param fermentadosEmPorcentagem Porcentagem de grãos fermentados.
+     * @param germinadosEmPorcentagem Porcentagem de grãos germinados.
+     * @param imaturosEmPorcentagem Porcentagem de grãos imaturos.
+     * @param chochosEmPorcentagem Porcentagem de grãos chochos.
+     * @param atacadosPorPragaEmPorcentagem Porcentagem de grãos atacados por pragas.
+     * @param demaisDanificadosEmPorcentagem Porcentagem de grãos danificados por outros motivos.
+     * @param esverdeadosEmPorcentagem Porcentagem de grãos esverdeados.
+     * @param partidosQuebradosAmaçadosEmPorcentagem Porcentagem de grãos partidos, quebrados ou amassados.
+     */
+    init {
+        require(inRange(ardidosEmPorcentagem))
+        require(inRange(queimadosEmPorcentagem))
+        require(inRange(mofadosEmPorcentagem))
+        require(inRange(fermentadosEmPorcentagem))
+        require(inRange(germinadosEmPorcentagem))
+        require(inRange(imaturosEmPorcentagem))
+        require(inRange(chochosEmPorcentagem))
+        require(inRange(atacadosPorPragaEmPorcentagem))
+        require(inRange(demaisDanificadosEmPorcentagem))
+        require(inRange(esverdeadosEmPorcentagem))
+        require(inRange(partidosQuebradosAmaçadosEmPorcentagem))
+    }
+
+    /**
+     * Intervalo tolerado pelos parâmetros.
+     */
+    private fun inRange(value: Double) = value in 0.0..100.0;
+
     /**
      * Calcula a porcentagem de grãos avariados, que inclui grãos ardidos, mofados, fermentados, germinados,
      * imaturos, chochos e danificados.

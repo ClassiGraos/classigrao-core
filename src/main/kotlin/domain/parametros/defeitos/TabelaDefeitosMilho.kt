@@ -13,7 +13,7 @@ package br.ufu.classisafra.model.parametros.defeitos
  * @property quebradosEmPorcentagem A porcentagem de grãos de milho quebrados na amostra.
  * @author Victor Hugo Ferreira Silva
  */
-data class DefeitosMilho(
+data class TabelaDefeitosMilho(
     var ardidosEmPorcentagem: Double = 0.0,
     var mofadosEmPorcentagem: Double = 0.0,
     var fermentadosEmPorcentagem: Double = 0.0,
@@ -23,6 +23,38 @@ data class DefeitosMilho(
     var carunchadosEmPorcentagem: Double = 0.0,
     var quebradosEmPorcentagem: Double = 0.0
 ) {
+
+    /**
+     * Inicializador da classe [TabelaDefeitosMilho].
+     *
+     * Este bloco de inicialização é usado para validar os valores iniciais da instância de [TabelaDefeitosMilho].
+     * Certifica-se de que todos os parâmetros estejam dentro do intervalo tolerado.
+     *
+     * @param ardidosEmPorcentagem Porcentagem de grãos ardidos.
+     * @param mofadosEmPorcentagem Porcentagem de grãos mofados.
+     * @param fermentadosEmPorcentagem Porcentagem de grãos fermentados.
+     * @param germinadosEmPorcentagem Porcentagem de grãos germinados.
+     * @param chochosImaturosEmPorcentagem Porcentagem de grãos chochos e imaturos.
+     * @param gessadosEmPorcentagem Porcentagem de grãos gessados.
+     * @param carunchadosEmPorcentagem Porcentagem de grãos carunchados.
+     * @param quebradosEmPorcentagem Porcentagem de grãos quebrados.
+     */
+    init {
+        require(inRange(ardidosEmPorcentagem))
+        require(inRange(mofadosEmPorcentagem))
+        require(inRange(fermentadosEmPorcentagem))
+        require(inRange(germinadosEmPorcentagem))
+        require(inRange(chochosImaturosEmPorcentagem))
+        require(inRange(gessadosEmPorcentagem))
+        require(inRange(carunchadosEmPorcentagem))
+        require(inRange(quebradosEmPorcentagem))
+    }
+
+    /**
+     * Intervalo tolerado pelos parâmetros.
+     */
+    private fun inRange(value: Double) = value in 0.0..100.0
+
     /**
      * Calcula a porcentagem total de grãos de milho avariados na amostra, considerando os defeitos ardidos,
      * mofados, fermentados, germinados, chochos e gesssados.

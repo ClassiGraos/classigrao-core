@@ -12,7 +12,7 @@ import br.ufu.classisafra.model.classificacao.grupo.GrupoSoja
 import br.ufu.classisafra.model.classificacao.tipo.Tipo
 import br.ufu.classisafra.model.classificacao.tipo.TipoSoja
 import domain.parametros.defeitos.Defeito
-import br.ufu.classisafra.model.parametros.defeitos.DefeitosSoja
+import br.ufu.classisafra.model.parametros.defeitos.TabelaDefeitosSoja
 import domain.parametros.impurezas.Impurezas
 import domain.parametros.umidade.Umidade
 
@@ -47,7 +47,7 @@ class Soja(
     /**
      * Estrutura DefeitosSoja, a qual os defeitos da Soja serão mapeados.
      */
-    lateinit var defeitosSoja : DefeitosSoja
+    lateinit var defeitosSoja : TabelaDefeitosSoja
 
     /**
      * Determina o tipo dos grãos de soja com base em uma tabela de tipos específica.
@@ -135,8 +135,8 @@ class Soja(
      *
      * @return Uma instância de DefeitosSoja com as porcentagens dos defeitos mapeadas.
      */
-    private fun mapearDefeitos(): DefeitosSoja {
-        var defeitosSoja = DefeitosSoja();
+    private fun mapearDefeitos(): TabelaDefeitosSoja {
+        var defeitosSoja = TabelaDefeitosSoja();
         for (defeito in defeitos){
             when (defeito.tipo) {
                 TiposDefeitosSoja.ARDIDOS -> defeitosSoja.ardidosEmPorcentagem = defeito.calcularPorcentagem()
