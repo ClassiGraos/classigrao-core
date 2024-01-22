@@ -9,8 +9,7 @@ import kotlin.test.assertEquals
 class DefeitoTest {
 
     @Test
-    @DisplayName("Quando o Deságio for maior que 100 deve lançar exceção.")
-    fun quandoDesagioAcimaDe100_ThrowsIllegalArgumentException(){
+    fun `quando o deságio for maior que 100 deve lançar exceção`(){
         assertThrows<IllegalArgumentException> { Defeito(
             DefeitosSojaEnum.QUEIMADOS,
             3.0,
@@ -21,8 +20,7 @@ class DefeitoTest {
     }
 
     @Test
-    @DisplayName("Quando o Deságio for menor que 0 deve lançar exceção.")
-    fun quandoDesagioAbaixoDe0_ThrowsIllegalArgumentException(){
+    fun `quando o deságio for menor que 0 deve lançar exceção`(){
         assertThrows<IllegalArgumentException> { Defeito(
             DefeitosSojaEnum.QUEIMADOS,
             3.0,
@@ -33,8 +31,7 @@ class DefeitoTest {
     }
 
     @Test
-    @DisplayName("Quando o Limite Tolerado for maior que 100 deve lançar exceção.")
-    fun quandoLimiteToleradoEmPorcentagemAcimaDe100_ThrowsIllegalArgumentException(){
+    fun `quando o limite tolerado for maior que 100 deve lançar exceção`(){
         assertThrows<IllegalArgumentException> { Defeito(
             DefeitosSojaEnum.QUEIMADOS,
             3.0,
@@ -45,8 +42,7 @@ class DefeitoTest {
     }
 
     @Test
-    @DisplayName("Quando o Limite Tolerado for menor que 0 deve lançar exceção.")
-    fun quandoLimiteToleradoEmPorcentagemMenorQue0_ThrowsIllegalArgumentException(){
+    fun `quando o limite tolerado for menor que 0 deve lançar exceção`(){
         assertThrows<IllegalArgumentException> { Defeito(
             DefeitosSojaEnum.QUEIMADOS,
             3.0,
@@ -57,8 +53,7 @@ class DefeitoTest {
     }
 
     @Test
-    @DisplayName("Quando o Peso em Gramas for menor que 0 deve lançar exceção.")
-    fun quandoPesoEmGramasMenorQue0_ThrowsIllegalArgumentException(){
+    fun `quando o peso em gramas for menor que 0 deve lançar exceção`(){
         assertThrows<IllegalArgumentException> { Defeito(
             DefeitosSojaEnum.QUEIMADOS,
             -1.0,
@@ -69,8 +64,7 @@ class DefeitoTest {
     }
 
     @Test
-    @DisplayName("Quando a Amostra em Gramas for igual 0 deve lançar exceção.")
-    fun quandoAmostraEmGramasIgual0_ThrowsIllegalArgumentException(){
+    fun `quando a amostra em gramas for igual 0 deve lançar exceção`(){
         assertThrows<IllegalArgumentException> { Defeito(
             DefeitosSojaEnum.QUEIMADOS,
             0.0,
@@ -81,8 +75,7 @@ class DefeitoTest {
     }
 
     @Test
-    @DisplayName("Quando a Amostra em Gramas for for menor que o Peso em Gramas deve lançar exceção.")
-    fun quandoAmostraEmGramasMenorQuePesoEmGramas_ThrowsIllegalArgumentException(){
+    fun `quando a amostra em gramas for for menor que o peso em gramas deve lançar exceção`(){
         assertThrows<IllegalArgumentException> { Defeito(
             DefeitosSojaEnum.QUEIMADOS,
             180.0,
@@ -93,8 +86,7 @@ class DefeitoTest {
     }
 
     @Test
-    @DisplayName("Calcula a porcentagem correta.")
-    fun calcularAPorcentagemTest() {
+    fun `calcula a porcentagem correta`() {
         val defeito = Defeito(
             DefeitosSojaEnum.QUEIMADOS,
             3.0,
@@ -107,8 +99,7 @@ class DefeitoTest {
     }
 
     @Test
-    @DisplayName("Quando o limite tolerado for maior que a porcentagem, estaAbaixoDoTolerado() deve retornar verdadeiro.")
-    fun estaAbaixoDoToleradoRetornTrue() {
+    fun `quando o limite tolerado for maior que a porcentagem, estaAbaixoDoTolerado() deve retornar verdadeiro`() {
         val defeito = Defeito(
             DefeitosSojaEnum.QUEIMADOS,
             1.0,
@@ -121,8 +112,7 @@ class DefeitoTest {
     }
 
     @Test
-    @DisplayName("Quando o limite tolerado for menor que a porcentagem, estaAbaixoDoTolerado() deve retornar falso.")
-    fun estaAbaixoDoToleradoReturnFalse() {
+    fun `quando o limite tolerado for menor que a porcentagem, estaAbaixoDoTolerado() deve retornar falso`() {
         val defeito = Defeito(
             DefeitosSojaEnum.QUEIMADOS,
             3.0,
@@ -135,17 +125,16 @@ class DefeitoTest {
     }
 
     @Test
-    @DisplayName("Calcula o desconto correto.")
-    fun calcularDescontEmKgTest() {
+    fun `calcula o desconto correto`() {
+        val pesoLoteInicial: Double = 1000.0;
         val defeito = Defeito(
-            DefeitosSojaEnum.QUEIMADOS,
-            3.0,
-            150.0,
-            5.0,
-            1.0)
-        val pesoInicialEmKg = 1000.0
-        val expected = 9.596 // (2.0 - 1.0) / (100.0 - 1.0) * (100.0 - 5.0 / 100.0) * 1000.0
-        val actual = defeito.calcularDescontoEmKg(pesoInicialEmKg)
+            DefeitosSojaEnum.ESVERDEADOS,
+            4.0,
+            100.0,
+            10.0,
+            2.0)
+        val expected =  (1000.0)*((4.0-2.0)/(100.0-2.0)*((100.0-10.0)/100.0))
+        val actual = defeito.calcularDescontoEmKg(pesoLoteInicial)
         assertEquals(expected, actual, 0.01)
     }
 

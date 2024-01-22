@@ -17,17 +17,16 @@ import domain.parametros.umidade.Umidade
  * @param defeitos Uma lista de objetos que representam defeitos dos grãos.
  * @author Victor Hugo Ferreira Silva
  */
-abstract class Graos(
+open class Graos(
 
     amostraEmGramas: Double,
     pesoInicialEmKg: Double,
-    var umidade: Umidade,
-    var impurezas: Impurezas,
-    var defeitos: List<Defeito>
+    umidade: Umidade,
+    impurezas: Impurezas,
+    defeitos: List<Defeito>
 
 ) {
-
-    /**
+     /**
      * Inicializa a classe [Graos], verificando se os valores iniciais de amostra e peso inicial estão dentro do
      * intervalo permitido.
      *
@@ -40,21 +39,14 @@ abstract class Graos(
     }
 
     /**
-     * Verifica se o valor fornecido está dentro do intervalo permitido (maior ou igual a zero).
-     *
-     * @param value O valor a ser verificado.
-     * @return true se o valor estiver dentro do intervalo permitido, caso contrário false.
-     */
-    private fun inRange(value: Double) = value > 0
-
-    /**
      * Peso da amostra em gramas.
      *
      * @throws IllegalArgumentException Se o peso da amostra for menor ou igual a zero.
      */
     var amostraEmGramas = amostraEmGramas
         set(value) {
-            if (value <= 0) throw IllegalArgumentException("O peso da amostra deve ser maior que zero.")
+            require(inRange(value)) { "O peso da amostra deve ser maior que zero." }
+            field = value
         }
 
     /**
@@ -64,9 +56,33 @@ abstract class Graos(
      */
     var pesoInicialEmKg = pesoInicialEmKg
         set(value) {
-            if (value <= 0) IllegalArgumentException("O peso inicial do lote deve ser maior que zero.")
+            require(inRange(value)) { "O peso inicial do lote deve ser maior que zero." }
+            field = value
         }
 
+    /**
+     * Objeto da classe Umidade.
+     */
+    var umidade: Umidade = umidade
+
+    /**
+     * Objeto da classe Impurezas.
+     */
+    var impurezas: Impurezas = impurezas
+
+    /**
+     * Lista de objetos da classe Defeito.
+     */
+    var defeitos: List<Defeito> = defeitos
+
+
+    /**
+     * Verifica se o valor fornecido está dentro do intervalo permitido (maior ou igual a zero).
+     *
+     * @param value O valor a ser verificado.
+     * @return true se o valor estiver dentro do intervalo permitido, caso contrário false.
+     */
+    private fun inRange(value: Double) = value > 0
 
     /**
      * Calcula o desconto em quilogramas (kg) com base nos defeitos, impurezas e umidade dos grãos.

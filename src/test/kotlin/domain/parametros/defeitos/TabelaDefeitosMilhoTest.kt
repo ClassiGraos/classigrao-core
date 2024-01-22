@@ -9,8 +9,7 @@ import kotlin.test.assertEquals
 class TabelaDefeitosMilhoTest {
 
     @Test
-    @DisplayName("Calcular Avariados em Porcentagem")
-    fun testCalcularAvariadosEmPorcentagem() {
+    fun `calcula total de avariados em porcentagem`() {
         val tabela = TabelaDefeitosMilho(
             ardidosEmPorcentagem = 10.0,
             mofadosEmPorcentagem = 5.0,
@@ -29,8 +28,7 @@ class TabelaDefeitosMilhoTest {
     }
 
     @Test
-    @DisplayName("Valores Iniciais Dentro do Intervalo")
-    fun testValoresIniciaisDentroDoIntervalo() {
+    fun `valores iniciais dentro do intervalo`() {
         val tabela = TabelaDefeitosMilho(
             ardidosEmPorcentagem = 10.0,
             mofadosEmPorcentagem = 20.0,
@@ -53,8 +51,7 @@ class TabelaDefeitosMilhoTest {
     }
 
     @Test
-    @DisplayName("Valores Iniciais Maior que 100")
-    fun testValoresInicialMaiorQue100() {
+    fun `valores iniciais maior que 100`() {
         assertThrows<IllegalArgumentException> {
             TabelaDefeitosMilho(
                 ardidosEmPorcentagem = 1.0,
@@ -70,8 +67,7 @@ class TabelaDefeitosMilhoTest {
     }
 
     @Test
-    @DisplayName("Valores Iniciais Menor que 0")
-    fun testValoresInicialMenorQue0() {
+    fun `valores iniciais menor que 0`() {
         assertThrows<IllegalArgumentException> {
             TabelaDefeitosMilho(
                 ardidosEmPorcentagem = -1.0,

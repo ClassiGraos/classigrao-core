@@ -22,7 +22,6 @@ class Umidade (
 
     ) : Toleravel, Descontavel {
 
-
     /**
      * Inicializa uma instância de [Umidade] com os valores de umidade e limite tolerado especificados.
      *
@@ -36,28 +35,39 @@ class Umidade (
      * @see Umidade
      */
     init {
-        if (umidadeEmPorcentagem < 0.0 || umidadeEmPorcentagem > 100.0) {
-            throw IllegalArgumentException("O teor de umidade deve estar entre 0 e 100.")
-        }
-        if (limiteToleradoEmPorcentagem < 0.0 || limiteToleradoEmPorcentagem > 100.0) {
-            throw IllegalArgumentException("O limite do teor de umidade deve estar entre 0 e 100.")
-        }
+        require(inRange(umidadeEmPorcentagem))
+        require(inRange(limiteToleradoEmPorcentagem))
     }
 
-
     /**
-     * Representa o teor de umidade do grão em porcentagem.
+     * Representa a umidade do grão em porcentagem.
      *
      * @param umidadeEmPorcentagem O valor inicial do teor de umidade (deve estar entre 0 e 100).
      */
-    private var umidadeEmPorcentagem: Double = umidadeEmPorcentagem
+    var umidadeEmPorcentagem: Double = umidadeEmPorcentagem
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
 
     /**
      * Representa o limite tolerado do teor de umidade do grão em porcentagem.
      *
      * @param limiteToleradoEmPorcentagem O valor inicial do limite tolerado (deve estar entre 0 e 100).
      */
-    private var limiteToleradoEmPorcentagem: Double = limiteToleradoEmPorcentagem
+    var limiteToleradoEmPorcentagem: Double = limiteToleradoEmPorcentagem
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
+
+    /**
+     * Intervalo tolerado pelos parâmetros.
+     *
+     * @param value O valor a ser verificado.
+     * @return `true` se o valor estiver dentro do intervalo permitido, caso contrário `false`.
+     */
+    private fun inRange(value: Double) = value in 0.0..100.0
 
     /**
      * Verifica se a umidade está abaixo do limite tolerado.

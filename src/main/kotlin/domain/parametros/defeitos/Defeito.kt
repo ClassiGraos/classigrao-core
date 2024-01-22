@@ -1,5 +1,6 @@
 package domain.parametros.defeitos
 
+import br.ufu.classisafra.model.classificacao.tipo.TipoEnum
 import domain.parametros.interfaces.Descontavel
 import domain.parametros.interfaces.Toleravel
 import br.ufu.classisafra.model.classificacao.tipos_defeitos.DefeitosEnum
@@ -22,11 +23,11 @@ import br.ufu.classisafra.model.classificacao.tipos_defeitos.DefeitosEnum
  */
 open class Defeito(
 
-    var tipo: DefeitosEnum,
+    tipo: DefeitosEnum,
     pesoEmGramas: Double,
     amostraEmGramas: Double,
     desagio: Double = 0.0,
-    limiteToleradoEmPorcentagem: Double = Double.POSITIVE_INFINITY
+    limiteToleradoEmPorcentagem: Double
 
 ): Toleravel, Descontavel {
 
@@ -44,34 +45,79 @@ open class Defeito(
      * @throws IllegalArgumentException Se algum dos valores iniciais estiver fora do intervalo aceitável.
      */
     init {
-        if (pesoEmGramas <= 0) throw IllegalArgumentException("O peso do defeito deve ser maior que zero.")
-        if (amostraEmGramas <= 0) throw IllegalArgumentException("O peso da amostra deve ser maior que zero.")
-        if (amostraEmGramas < pesoEmGramas) throw IllegalArgumentException("O peso da amostra deve ser maior que o peso do defeito.")
-        if (desagio < 0 || desagio > 100) throw IllegalArgumentException("O desagio deve estar entre 0 e 100.")
-        if (limiteToleradoEmPorcentagem < 0 || limiteToleradoEmPorcentagem > 100) throw IllegalArgumentException("O limite tolerado deve estar entre 0 e 100.")
+        require(isPositive(pesoEmGramas))
+        require(isPositive(amostraEmGramas))
+        require(amostraEmGramas >= pesoEmGramas)
+        require(inRange(desagio))
+        require(inRange(limiteToleradoEmPorcentagem))
     }
 
     /**
+     * Tipo do Defeito.
+     */
+    var tipo: DefeitosEnum = tipo
+
+    /**
      * Peso do defeito em gramas.
+     *
+     * @throws IllegalArgumentException Se o peso do defeito for menor ou igual a zero.
      */
     var pesoEmGramas: Double = pesoEmGramas
+        set(value) {
+            require(isPositive(value))
+            require(value <= amostraEmGramas)
+            field = value
+        }
 
     /**
      * Peso da amostra em gramas.
+     *
+     * @throws IllegalArgumentException Se o peso da amostra for menor ou igual a zero.
      */
     var amostraEmGramas: Double = amostraEmGramas
+        set(value) {
+            require(isPositive(value))
+            require(value >= pesoEmGramas)
+            field = value
+        }
 
     /**
-     * Valor do deságio do defeito.
+     * Deságio do defeito em porcentagem.
+     *
+     * @throws IllegalArgumentException Se o deságio estiver fora do intervalo permitido.
      */
     var desagio: Double = desagio
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
 
     /**
-     * Representa o limite tolerado do defeito do grão em porcentagem.
+     * Limite tolerado do defeito em porcentagem.
      *
-     * @param limiteToleradoEmPorcentagem O valor inicial do limite tolerado (deve estar entre 0 e 100).
+     * @throws IllegalArgumentException Se o limite tolerado estiver fora do intervalo permitido.
      */
-    var limiteToleradoEmPorcentagem: Double  = limiteToleradoEmPorcentagem
+    var limiteToleradoEmPorcentagem: Double = limiteToleradoEmPorcentagem
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
+
+    /**
+     * Verifica se o valor é positivo e diferente de zero.
+     *
+     * @param value O valor a ser verificado.
+     * @return `true` se o valor estiver dentro do intervalo permitido, caso contrário `false`.
+     */
+    private fun isPositive(value: Double) = value > 0
+
+    /**
+     * Intervalo tolerado pelos parâmetros.
+     *
+     * @param value O valor a ser verificado.
+     * @return `true` se o valor estiver dentro do intervalo permitido, caso contrário `false`.
+     */
+    private fun inRange(value: Double) = value in 0.0..100.0
 
     /**
      * Calcula a porcentagem do defeito em relação à amostra.

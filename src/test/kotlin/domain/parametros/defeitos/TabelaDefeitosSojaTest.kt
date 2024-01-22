@@ -9,8 +9,7 @@ import kotlin.test.assertEquals
 class TabelaDefeitosSojaTest {
 
     @Test
-    @DisplayName("Calcular Avariados em Porcentagem")
-    fun testCalcularAvariadosEmPorcentagem() {
+    fun `calcula total de avariados em porcentagem`() {
         val tabela = TabelaDefeitosSoja(
             ardidosEmPorcentagem = 10.0,
             queimadosEmPorcentagem = 2.0,
@@ -32,8 +31,7 @@ class TabelaDefeitosSojaTest {
     }
 
     @Test
-    @DisplayName("Calcular Ardidos e Queimados em Porcentagem")
-    fun testCalcularArdidosQueimadosEmPorcentagem() {
+    fun `calcula total de ardidos e queimados em porcentagem`() {
         val tabela = TabelaDefeitosSoja(
             ardidosEmPorcentagem = 10.0,
             queimadosEmPorcentagem = 5.0,
@@ -54,8 +52,7 @@ class TabelaDefeitosSojaTest {
     }
 
     @Test
-    @DisplayName("Calcular Danificados em Porcentagem")
-    fun testCalcularDanificadosEmPorcentagem() {
+    fun `calcular danificados em porcentagem`() {
         val tabela = TabelaDefeitosSoja(
             ardidosEmPorcentagem = 10.0,
             queimadosEmPorcentagem = 5.0,
@@ -76,8 +73,7 @@ class TabelaDefeitosSojaTest {
     }
 
     @Test
-    @DisplayName("Calcular Defeitos Graves em Porcentagem")
-    fun testCalcularDefeitosGravesEmPorcentagem() {
+    fun `calcula defeitos graves em porcentagem`() {
         val tabela = TabelaDefeitosSoja(
             ardidosEmPorcentagem = 10.0,
             queimadosEmPorcentagem = 5.0,
@@ -98,8 +94,7 @@ class TabelaDefeitosSojaTest {
     }
 
     @Test
-    @DisplayName("Valores Iniciais Dentro do Intervalo")
-    fun testValoresIniciaisDentroDoIntervalo() {
+    fun `valores iniciais dentro do intervalo`() {
         val tabela = TabelaDefeitosSoja(
             ardidosEmPorcentagem = 10.0,
             queimadosEmPorcentagem = 20.0,
@@ -128,8 +123,7 @@ class TabelaDefeitosSojaTest {
     }
 
     @Test
-    @DisplayName("Valores Iniciais Maior que 100")
-    fun testValoresInicialMaiorQue100() {
+    fun `valores iniciais maior que 100`() {
         assertThrows<IllegalArgumentException> {
             TabelaDefeitosSoja(
                 ardidosEmPorcentagem = 1.0,
@@ -148,8 +142,7 @@ class TabelaDefeitosSojaTest {
     }
 
     @Test
-    @DisplayName("Valores Iniciais Menor que 0")
-    fun testValoresInicialMenorQue0() {
+    fun `valores iniciais menor que 0`() {
         assertThrows<IllegalArgumentException> {
             TabelaDefeitosSoja(
                 ardidosEmPorcentagem = -1.0,

@@ -17,9 +17,11 @@ import br.ufu.classisafra.model.graos.Graos
 import domain.parametros.defeitos.Defeito
 import domain.parametros.impurezas.Impurezas
 import domain.parametros.umidade.Umidade
-import br.ufu.classisafra.model.parametros.consistencia.ConsistenciaMilho
-import br.ufu.classisafra.model.parametros.cores.CoresMilho
+import br.ufu.classisafra.model.parametros.consistencia.ConsistenciaMilhoPorcentagem
+import br.ufu.classisafra.model.parametros.cores.CoresMilhoPorcentagem
 import br.ufu.classisafra.model.parametros.defeitos.TabelaDefeitosMilho
+import domain.parametros.consistencia.ConsistenciaMilho
+import domain.parametros.cores.CoresMilho
 
 /**
  * Classe que representa grãos de milho e suas características.
@@ -45,14 +47,8 @@ class Milho(
     umidade: Umidade,
     impurezas: Impurezas,
     defeitos: List<Defeito>,
-    var amostraGrupoEmGramas: Double,
-    var graosDurosEmGramas: Double,
-    var graosSemidurosEmGramas: Double,
-    var graosDentadosEmGramas: Double,
-    var amostraClasseEmGramas: Double,
-    var graosAmarelosEmGramas: Double,
-    var graosBrancosEmGramas: Double,
-    var graosColoridosEmGramas: Double
+    consistenciaMilho: ConsistenciaMilho,
+    coresMilho: CoresMilho
 ) : Graos(
     amostraEmGramas = amostraEmGramas,
     pesoInicialEmKg = pesoInicialEmKg,
@@ -60,6 +56,17 @@ class Milho(
     impurezas = impurezas,
     defeitos = defeitos
 ) {
+
+    /**
+     * Estrutura CoresMilho com o peso de diferentes Cores da amostra.
+     */
+    var coresMilho: CoresMilho = coresMilho
+
+    /**
+     * Estrutura ConsistenciaMilho com o peso de diferentes Consistências da amostra.
+     */
+    var consistenciaMilho: ConsistenciaMilho = consistenciaMilho
+
     /**
      * Estrutura DefeitosMilho, a qual os defeitos do Milho serão mapeados.
      */
@@ -109,38 +116,38 @@ class Milho(
      * @return O grupo dos grãos de milho.
      */
     fun determinarGrupo(tabelaGrupo: TabelaGrupoMilho): GrupoEnum {
-        val consistenciaMilho = calcularPorcentagensConsistencia()
+        val consistenciaMilhoPorcentagem = calcularPorcentagensConsistencia()
 
-        if (consistenciaMilho.duroEmPorcentagem > tabelaGrupo.minimoGraosDuros) return GrupoMilhoEnum.DURO
-        else if (consistenciaMilho.semiduroEmPorcentagem > tabelaGrupo.minimoGraosSemiduros) return GrupoMilhoEnum.SEMIDURO
-        else if (consistenciaMilho.dentadoEmPorcentagem > tabelaGrupo.minimoGraosDentados) return GrupoMilhoEnum.DENTADO
+        if (consistenciaMilhoPorcentagem.duroEmPorcentagem > tabelaGrupo.minimoGraosDuros) return GrupoMilhoEnum.DURO
+        else if (consistenciaMilhoPorcentagem.semiduroEmPorcentagem > tabelaGrupo.minimoGraosSemiduros) return GrupoMilhoEnum.SEMIDURO
+        else if (consistenciaMilhoPorcentagem.dentadoEmPorcentagem > tabelaGrupo.minimoGraosDentados) return GrupoMilhoEnum.DENTADO
         return GrupoMilhoEnum.MISTURADO
     }
 
     /**
      * Calcula as porcentagens de consistência dos grãos de milho.
      *
-     * @return Um objeto [ConsistenciaMilho] contendo as porcentagens de grãos de milho duros, semiduros e dentados.
+     * @return Um objeto [ConsistenciaMilhoPorcentagem] contendo as porcentagens de grãos de milho duros, semiduros e dentados.
      */
-    fun calcularPorcentagensConsistencia(): ConsistenciaMilho {
-        var consistenciaMilho = ConsistenciaMilho()
-        consistenciaMilho.duroEmPorcentagem = (graosDurosEmGramas / amostraGrupoEmGramas)*100
-        consistenciaMilho.semiduroEmPorcentagem = (graosSemidurosEmGramas / amostraGrupoEmGramas)*100
-        consistenciaMilho.dentadoEmPorcentagem = (graosDentadosEmGramas / amostraGrupoEmGramas)*100
-        return consistenciaMilho
+    fun calcularPorcentagensConsistencia(): ConsistenciaMilhoPorcentagem {
+        var consistenciaMilhoPorcentagem = ConsistenciaMilhoPorcentagem()
+        consistenciaMilhoPorcentagem.duroEmPorcentagem = (consistenciaMilho.graosDurosEmGramas / consistenciaMilho.amostraGrupoEmGramas)*100
+        consistenciaMilhoPorcentagem.semiduroEmPorcentagem = (consistenciaMilho.graosSemidurosEmGramas / consistenciaMilho.amostraGrupoEmGramas)*100
+        consistenciaMilhoPorcentagem.dentadoEmPorcentagem = (consistenciaMilho.graosDentadosEmGramas / consistenciaMilho.amostraGrupoEmGramas)*100
+        return consistenciaMilhoPorcentagem
     }
 
     /**
      * Calcula as porcentagens de cores dos grãos de milho.
      *
-     * @return Um objeto [CoresMilho] contendo as porcentagens de grãos de milho amarelos, brancos e coloridos.
+     * @return Um objeto [CoresMilhoPorcentagem] contendo as porcentagens de grãos de milho amarelos, brancos e coloridos.
      */
-    fun calcularPorcentagensCores(): CoresMilho {
-        var coresMilho = CoresMilho()
-        coresMilho.amarelosEmPorcentagem = (graosAmarelosEmGramas / amostraClasseEmGramas)*100
-        coresMilho.brancosEmPorcentagem = (graosBrancosEmGramas / amostraClasseEmGramas)*100
-        coresMilho.coloridosEmPorcentagem = (graosColoridosEmGramas / amostraClasseEmGramas)*100
-        return coresMilho
+    fun calcularPorcentagensCores(): CoresMilhoPorcentagem {
+        var coresMilhoPorcentagem = CoresMilhoPorcentagem()
+        coresMilhoPorcentagem.amarelosEmPorcentagem = (coresMilho.graosAmarelosEmGramas / coresMilho.amostraClasseEmGramas)*100
+        coresMilhoPorcentagem.brancosEmPorcentagem = (coresMilho.graosBrancosEmGramas / coresMilho.amostraClasseEmGramas)*100
+        coresMilhoPorcentagem.coloridosEmPorcentagem = (coresMilho.graosColoridosEmGramas / coresMilho.amostraClasseEmGramas)*100
+        return coresMilhoPorcentagem
     }
 
     /**

@@ -1,5 +1,7 @@
 package domain.parametros.impurezas
 
+import domain.parametros.umidade.Umidade
+import org.junit.jupiter.api.Assertions
 import org.junit.jupiter.api.DisplayName
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
@@ -8,8 +10,7 @@ import kotlin.test.assertEquals
 class ImpurezasTest {
 
     @Test
-    @DisplayName("Quando o Limite Tolerado for maior que 100 deve lançar exceção.")
-    fun quandoLimiteToleradoEmPorcentagemAcimaDe100_ThrowsIllegalArgumentException(){
+    fun `quando o limite tolerado for maior que 100 deve lançar exceção`(){
         assertThrows<IllegalArgumentException> { Impurezas(
             3.0,
             150.0,
@@ -18,8 +19,7 @@ class ImpurezasTest {
     }
 
     @Test
-    @DisplayName("Quando o Limite Tolerado for menor que 0 deve lançar exceção.")
-    fun quandoLimiteToleradoEmPorcentagemMenorQue0_ThrowsIllegalArgumentException(){
+    fun `quando o limite tolerado for menor que 0 deve lançar exceção`(){
         assertThrows<IllegalArgumentException> { Impurezas(
             3.0,
             150.0,
@@ -28,8 +28,7 @@ class ImpurezasTest {
     }
 
     @Test
-    @DisplayName("Quando o Peso em Gramas for menor que 0 deve lançar exceção.")
-    fun quandoPesoEmGramasMenorQue0_ThrowsIllegalArgumentException(){
+    fun `quando o peso em gramas for menor que 0 deve lançar exceção`(){
         assertThrows<IllegalArgumentException> { Impurezas(
             -1.0,
             150.0,
@@ -38,8 +37,7 @@ class ImpurezasTest {
     }
 
     @Test
-    @DisplayName("Quando a Amostra em Gramas for igual 0 deve lançar exceção.")
-    fun quandoAmostraEmGramasIgual0_ThrowsIllegalArgumentException(){
+    fun `quando a amostra em gramas for igual 0 deve lançar exceção`(){
         assertThrows<IllegalArgumentException> { Impurezas(
             0.0,
             0.0,
@@ -48,8 +46,7 @@ class ImpurezasTest {
     }
 
     @Test
-    @DisplayName("Quando a Amostra em Gramas for for menor que o Peso em Gramas deve lançar exceção.")
-    fun quandoAmostraEmGramasMenorQuePesoEmGramas_ThrowsIllegalArgumentException(){
+    fun `quando a amostra em gramas for for menor que o peso em gramas deve lançar exceção`(){
         assertThrows<IllegalArgumentException> { Impurezas(
             180.0,
             150.0,
@@ -58,8 +55,7 @@ class ImpurezasTest {
     }
 
     @Test
-    @DisplayName("Calcula a porcentagem correta.")
-    fun calcularAPorcentagemTest() {
+    fun `calcula a porcentagem correta`() {
         val impurezas = Impurezas(
             3.0,
             150.0,
@@ -70,8 +66,7 @@ class ImpurezasTest {
     }
 
     @Test
-    @DisplayName("Quando o limite tolerado for maior que a porcentagem, estaAbaixoDoTolerado() deve retornar verdadeiro.")
-    fun estaAbaixoDoToleradoRetornTrue() {
+    fun `quando o limite tolerado for maior que a porcentagem, estaAbaixoDoTolerado() deve retornar verdadeiro`() {
         val impurezas = Impurezas(
             1.0,
             150.0,
@@ -82,8 +77,7 @@ class ImpurezasTest {
     }
 
     @Test
-    @DisplayName("Quando o limite tolerado for menor que a porcentagem, estaAbaixoDoTolerado() deve retornar falso.")
-    fun estaAbaixoDoToleradoReturnFalse() {
+    fun `quando o limite tolerado for menor que a porcentagem, estaAbaixoDoTolerado() deve retornar falso`() {
         val impurezas = Impurezas(
             3.0,
             150.0,
@@ -94,16 +88,13 @@ class ImpurezasTest {
     }
 
     @Test
-    @DisplayName("Calcula o desconto correto.")
-    fun calcularDescontEmKgTest() {
-        val impurezas = Impurezas(
-            3.0,
-            150.0,
-            1.0)
-        val pesoInicialEmKg = 1000.0
-        val expected = 10.101// (2.0 - 1.0) / (100.0 - 1.0) * 1000.0
-        val actual = impurezas.calcularDescontoEmKg(pesoInicialEmKg)
-        assertEquals(expected, actual, 0.01)
+    fun `calcular desconto em kg válido`() {
+        val pesoLoteInicial: Double = 1000.0;
+        val impurezas: Impurezas = Impurezas(2.0, 100.0, 1.0);
+
+        val expectedDesconto: Double = (1000.0)*(2.0 - 1.0)/(100.0-1.0)
+        val actualDesconto: Double = impurezas.calcularDescontoEmKg(pesoLoteInicial);
+        Assertions.assertEquals(expectedDesconto, actualDesconto, 0.01)
     }
 
 }

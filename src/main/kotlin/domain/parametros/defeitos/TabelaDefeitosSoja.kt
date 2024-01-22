@@ -3,30 +3,31 @@ package br.ufu.classisafra.model.parametros.defeitos
 /**
  * Esta classe representa os defeitos encontrados em grãos de soja.
  *
- * @property ardidosEmPorcentagem Porcentagem de grãos ardidos.
- * @property queimadosEmPorcentagem Porcentagem de grãos queimados.
- * @property mofadosEmPorcentagem Porcentagem de grãos mofados.
- * @property fermentadosEmPorcentagem Porcentagem de grãos fermentados.
- * @property germinadosEmPorcentagem Porcentagem de grãos germinados.
- * @property imaturosEmPorcentagem Porcentagem de grãos imaturos.
- * @property chochosEmPorcentagem Porcentagem de grãos chochos.
- * @property atacadosPorPragaEmPorcentagem Porcentagem de grãos atacados por pragas.
- * @property demaisDanificadosEmPorcentagem Porcentagem de grãos danificados por outros motivos.
- * @property esverdeadosEmPorcentagem Porcentagem de grãos esverdeados.
- * @property partidosQuebradosAmaçadosEmPorcentagem Porcentagem de grãos partidos, quebrados ou amassados.
+ * @param ardidosEmPorcentagem Porcentagem de grãos ardidos.
+ * @param queimadosEmPorcentagem Porcentagem de grãos queimados.
+ * @param mofadosEmPorcentagem Porcentagem de grãos mofados.
+ * @param fermentadosEmPorcentagem Porcentagem de grãos fermentados.
+ * @param germinadosEmPorcentagem Porcentagem de grãos germinados.
+ * @param imaturosEmPorcentagem Porcentagem de grãos imaturos.
+ * @param chochosEmPorcentagem Porcentagem de grãos chochos.
+ * @param atacadosPorPragaEmPorcentagem Porcentagem de grãos atacados por pragas.
+ * @param demaisDanificadosEmPorcentagem Porcentagem de grãos danificados por outros motivos.
+ * @param esverdeadosEmPorcentagem Porcentagem de grãos esverdeados.
+ * @param partidosQuebradosAmaçadosEmPorcentagem Porcentagem de grãos partidos, quebrados ou amassados.
+ * @author Victor Hugo Ferreira Silva
  */
-data class TabelaDefeitosSoja(
-    var ardidosEmPorcentagem: Double = 0.0,
-    var queimadosEmPorcentagem: Double = 0.0,
-    var mofadosEmPorcentagem: Double = 0.0,
-    var fermentadosEmPorcentagem: Double = 0.0,
-    var germinadosEmPorcentagem: Double = 0.0,
-    var imaturosEmPorcentagem: Double = 0.0,
-    var chochosEmPorcentagem: Double = 0.0,
-    var atacadosPorPragaEmPorcentagem: Double = 0.0,
-    var demaisDanificadosEmPorcentagem: Double = 0.0,
-    var esverdeadosEmPorcentagem: Double = 0.0,
-    var partidosQuebradosAmaçadosEmPorcentagem: Double = 0.0
+class TabelaDefeitosSoja(
+    ardidosEmPorcentagem: Double = 0.0,
+    queimadosEmPorcentagem: Double = 0.0,
+    mofadosEmPorcentagem: Double = 0.0,
+    fermentadosEmPorcentagem: Double = 0.0,
+    germinadosEmPorcentagem: Double = 0.0,
+    imaturosEmPorcentagem: Double = 0.0,
+    chochosEmPorcentagem: Double = 0.0,
+    atacadosPorPragaEmPorcentagem: Double = 0.0,
+    demaisDanificadosEmPorcentagem: Double = 0.0,
+    esverdeadosEmPorcentagem: Double = 0.0,
+    partidosQuebradosAmaçadosEmPorcentagem: Double = 0.0
 ) {
 
     /**
@@ -60,6 +61,138 @@ data class TabelaDefeitosSoja(
         require(inRange(esverdeadosEmPorcentagem))
         require(inRange(partidosQuebradosAmaçadosEmPorcentagem))
     }
+
+    /**
+     * Define a porcentagem de grãos ardidos.
+     *
+     * @param value O novo valor (deve estar entre 0 e 100).
+     * @throws IllegalArgumentException Se o valor fornecido estiver fora do intervalo aceitável.
+     */
+    var ardidosEmPorcentagem: Double = ardidosEmPorcentagem
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
+
+    /**
+     * Define a porcentagem de grãos queimados.
+     *
+     * @param value O novo valor (deve estar entre 0 e 100).
+     * @throws IllegalArgumentException Se o valor fornecido estiver fora do intervalo aceitável.
+     */
+    var queimadosEmPorcentagem: Double = queimadosEmPorcentagem
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
+
+    /**
+     * Define a porcentagem de grãos mofados.
+     *
+     * @param value O novo valor (deve estar entre 0 e 100).
+     * @throws IllegalArgumentException Se o valor fornecido estiver fora do intervalo aceitável.
+     */
+    var mofadosEmPorcentagem: Double = mofadosEmPorcentagem
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
+
+    /**
+     * Define a porcentagem de grãos fermentados.
+     *
+     * @param value O novo valor (deve estar entre 0 e 100).
+     * @throws IllegalArgumentException Se o valor fornecido estiver fora do intervalo aceitável.
+     */
+    var fermentadosEmPorcentagem: Double = fermentadosEmPorcentagem
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
+
+    /**
+     * Define a porcentagem de grãos germinados.
+     *
+     * @param value O novo valor (deve estar entre 0 e 100).
+     * @throws IllegalArgumentException Se o valor fornecido estiver fora do intervalo aceitável.
+     */
+    var germinadosEmPorcentagem: Double = germinadosEmPorcentagem
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
+
+    /**
+     * Define a porcentagem de grãos imaturos.
+     *
+     * @param value O novo valor (deve estar entre 0 e 100).
+     * @throws IllegalArgumentException Se o valor fornecido estiver fora do intervalo aceitável.
+     */
+    var imaturosEmPorcentagem: Double = imaturosEmPorcentagem
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
+
+    /**
+     * Define a porcentagem de grãos chochos.
+     *
+     * @param value O novo valor (deve estar entre 0 e 100).
+     * @throws IllegalArgumentException Se o valor fornecido estiver fora do intervalo aceitável.
+     */
+    var chochosEmPorcentagem: Double = chochosEmPorcentagem
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
+
+    /**
+     * Define a porcentagem de grãos atacados por pragas.
+     *
+     * @param value O novo valor (deve estar entre 0 e 100).
+     * @throws IllegalArgumentException Se o valor fornecido estiver fora do intervalo aceitável.
+     */
+    var atacadosPorPragaEmPorcentagem: Double = atacadosPorPragaEmPorcentagem
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
+
+    /**
+     * Define a porcentagem de grãos danificados de outra forma.
+     *
+     * @param value O novo valor (deve estar entre 0 e 100).
+     * @throws IllegalArgumentException Se o valor fornecido estiver fora do intervalo aceitável.
+     */
+    var demaisDanificadosEmPorcentagem: Double = demaisDanificadosEmPorcentagem
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
+
+    /**
+     * Define a porcentagem de grãos esverdeados.
+     *
+     * @param value O novo valor (deve estar entre 0 e 100).
+     * @throws IllegalArgumentException Se o valor fornecido estiver fora do intervalo aceitável.
+     */
+    var esverdeadosEmPorcentagem: Double = esverdeadosEmPorcentagem
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
+
+    /**
+     * Define a porcentagem de grãos partidos, quebrados ou amassados.
+     *
+     * @param value O novo valor (deve estar entre 0 e 100).
+     * @throws IllegalArgumentException Se o valor fornecido estiver fora do intervalo aceitável.
+     */
+    var partidosQuebradosAmaçadosEmPorcentagem: Double = partidosQuebradosAmaçadosEmPorcentagem
+        set(value) {
+            require(inRange(value))
+            field = value
+        }
 
     /**
      * Intervalo tolerado pelos parâmetros.

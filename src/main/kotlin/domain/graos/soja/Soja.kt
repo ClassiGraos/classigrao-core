@@ -14,6 +14,7 @@ import br.ufu.classisafra.model.classificacao.tipo.TipoSojaEnum
 import br.ufu.classisafra.model.graos.Graos
 import domain.parametros.defeitos.Defeito
 import br.ufu.classisafra.model.parametros.defeitos.TabelaDefeitosSoja
+import domain.parametros.cores.CoresSoja
 import domain.parametros.impurezas.Impurezas
 import domain.parametros.umidade.Umidade
 
@@ -34,9 +35,7 @@ class Soja(
     umidade: Umidade,
     impurezas: Impurezas,
     defeitos: List<Defeito>,
-    var amostraClasseEmGramas: Double,
-    var graosAmarelosEmGramas: Double,
-    var graosOutrasCoresEmGramas: Double
+    coresSoja: CoresSoja
 ) : Graos(
     amostraEmGramas = amostraEmGramas,
     pesoInicialEmKg = pesoInicialEmKg,
@@ -44,6 +43,11 @@ class Soja(
     impurezas = impurezas,
     defeitos = defeitos
 ) {
+
+    /**
+     * Estrutura CoresSoja com o peso de diferentes Cores da amostra.
+     */
+    var coresSoja = coresSoja
 
     /**
      * Estrutura DefeitosSoja, a qual os defeitos da Soja serão mapeados.
@@ -90,7 +94,7 @@ class Soja(
      * @return A porcentagem de grãos amarelos.
      */
     fun calcularPorcentagemAmarelos(): Double {
-        return (graosAmarelosEmGramas / amostraClasseEmGramas)*100
+        return (coresSoja.graosAmarelosEmGramas / coresSoja.amostraClasseEmGramas)*100
     }
 
 

@@ -26,5 +26,4 @@ class Impurezas (
     amostraEmGramas = amostraEmGramas,
     desagio = 0.0,
     limiteToleradoEmPorcentagem = limiteToleradoEmPorcentagem
-
 )
