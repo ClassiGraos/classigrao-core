@@ -1,4 +1,4 @@
-package domain.graos.Soja
+package domain.graos.soja
 
 import br.ufu.classisafra.data.classe.TabelaClasseSoja
 import br.ufu.classisafra.data.tipo.TabelaTipoSoja
@@ -8,12 +8,10 @@ import br.ufu.classisafra.model.classificacao.grupo.GrupoSojaEnum
 import br.ufu.classisafra.model.classificacao.tipo.TipoEnum
 import br.ufu.classisafra.model.classificacao.tipo.TipoSojaEnum
 import br.ufu.classisafra.model.classificacao.tipos_defeitos.DefeitosSojaEnum
-import domain.graos.soja.Soja
 import domain.parametros.cores.CoresSoja
 import domain.parametros.defeitos.Defeito
 import domain.parametros.impurezas.Impurezas
 import domain.parametros.umidade.Umidade
-import domain.tabelas.classe.interfaces.TabelaClasse
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
